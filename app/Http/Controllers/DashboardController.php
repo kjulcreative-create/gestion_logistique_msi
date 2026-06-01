@@ -47,8 +47,13 @@ class DashboardController extends Controller
             ->take(6)
             ->get();
 
+        $dateExpr = match(config('database.default')) {
+            'mysql', 'mariadb' => "DATE_FORMAT(`date`, '%Y-%m')",
+            default            => "strftime('%Y-%m', date)",
+        };
+
         $depensesMoisParMois = ConsommationCarburant::selectRaw(
-            "strftime('%Y-%m', date) as mois, SUM(montant_total) as total"
+            "$dateExpr as mois, SUM(montant_total) as total"
         )->groupBy('mois')->orderBy('mois')->take(6)->get();
 
         return view('dashboard', compact(
