@@ -70,6 +70,7 @@
 <body class="h-full flex items-center justify-center">
 
 {{-- ===== PAGE DE CONNEXION ===== --}}
+
 <div class="w-full max-w-md px-4">
     {{-- Logo --}}
     <div id="guide-logo" class="text-center mb-8">
